@@ -88,6 +88,7 @@ Encapsulation in this TransactionData class hides the internal data structures s
             'z_scores': z_scores
         }
    ```
+
    ```python
 class SignalProcessor(ABC):
 
@@ -119,8 +120,7 @@ I put both codes in there to show how inheritance and abstraction work together 
 In the code, abstraction is shown by the abstract base classes FraudDetector and SignalProcessor, which define abstract methods like detect and process that must be implemented by subclasses. Inheritance is demonstrated as ThresholdDetector inherits from FraudDetector, as for FFTProcessor inherits from SignalProcessor, providing specific implementations of these abstract methods.
 
  4.  **Polymorphism**
-    
-     ```python
+       ```python
     class FraudDetector(ABC): 
     
         @abstractmethod
@@ -187,8 +187,7 @@ The FraudDetector interface defines the abstract detect(self, processed_signal, 
 ## Design pattern
 
    **Factory Method**
-
-   ```python
+     ```python
     
     class DetectorFactory: 
         @staticmethod
@@ -209,7 +208,7 @@ The FraudDetector interface defines the abstract detect(self, processed_signal, 
                 return WaveletProcessor(**kwargs)
             else:
                 raise ValueError(f"Unsupported processor type: {processor_type}")
-```
+    ```
 
 The reason as to why I've put the factory method instead of singleton, prototype, or builder is because I needed an interface for creating families of related or dependent objects without specifying their concrete classes. The Singleton pattern ensures that only one instance of a class exists, but I don't need that because I'm searching for multipurposefuness. The Prototype pattern involves creating new objects by cloning existing ones, but I don't need that, since I'm delibaretely trying to have different types of algorithm objects, and I think the added complexity of a Builder would be unnecessary.
 
