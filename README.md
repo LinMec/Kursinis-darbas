@@ -363,6 +363,10 @@ I suppose it would be rather useful to check through few aspects
   - Actual real life application: This could be integrated in a game or any other system, as this is only a prototype, but it would help a lot to punish people that may seem suspicious
   - GUI for the SYSAdmin: So that it would be pleasant for the SYSAdmin's eyes:) 
 
+### What was difficult
+
+Had an interesting time with learning new libraries as well as trying few calculation methods by other algorithms, whether it would be random forest algorithm (which made me learn trees, more indepth about graphs), support vector machine (SVM), decision tree (D.T.), and logistic regression. All in all I'm happy with what I've got.
+
 ### What I've learned
 
 I suppose I've learned how to display signals and graphs, I now know how to use more advanced data structure algorithms, alongside signal processing and statistics. 
