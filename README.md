@@ -113,7 +113,7 @@ This program is designed to detect and trace financial fraud by analyzing data p
         return "Fast Fourier Transform"
       ```
 
-      I put both codes in there to show how inheritance and abstraction work together like an abusive relationship. Abstraction lays down all the rules without doing any real work, and inheritance just nods along and takes everything, whether it asked for it or not. I used this a lot because it was simply comfortable. 
+      I put both codes in there to show how inheritance and abstraction work together like an abusive relationship. Abstraction lays down all the rules without doing any real work, and inheritance just nods along and takes everything, whether it asked for it or not. I used this a lot because it is simply comfortable to use. In all seriousness, 
       
 
    
