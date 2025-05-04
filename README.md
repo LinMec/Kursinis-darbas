@@ -59,8 +59,7 @@ This program is designed to detect and trace financial fraud by analyzing data p
     ```
     
     Transactions, amounts, and every other morsel of data are securely stuffed inside layers of encapsulation. Why? Because cyber-attacks are out there, lurking, like a badly tuned Audi A3 in "Krasnucha", ready to ruin your day. But in all seriousness, it's the main use of encapsulation - safety, so that only intended users would be able to get the data.
-
-   2. **Inheritance/Abstraction**
+     2. **Inheritance/Abstraction**
 
       ```python
       class FraudDetector(ABC): 
