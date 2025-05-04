@@ -65,7 +65,7 @@ Encapsulation in this TransactionData class hides the internal data structures s
 2/3.  **Abstraction/Inheritance**
 
    ```python
-       class FraudDetector(ABC): 
+   class FraudDetector(ABC): 
         @abstractmethod
         def detect(self, processed_signal, raw_data):
         pass
@@ -87,6 +87,9 @@ Encapsulation in this TransactionData class hides the internal data structures s
             'scores': confidence_scores,
             'z_scores': z_scores
         }
+```
+
+```python
 class SignalProcessor(ABC):
 
     @abstractmethod
