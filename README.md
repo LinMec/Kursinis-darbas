@@ -62,7 +62,7 @@ Transactions, amounts, and every other morsel of data are securely stuffed insid
 
 Encapsulation in this TransactionData class hides the internal data structures such as __transactions, __timestamps, and __amounts by making them private with double underscores. This prevents direct access or modification of these attributes from outside the class, ensuring data integrity. The class controls how raw input data is parsed and stored through the private method __parse_data, centralizing and protecting the parsing logic.
 
-2/3.  **Abstraction/Inheritance**
+   2/3.  **Abstraction/Inheritance**
 
    ```python
        class FraudDetector(ABC): 
@@ -118,7 +118,8 @@ I put both codes in there to show how inheritance and abstraction work together 
 
 In the code, abstraction is shown by the abstract base classes FraudDetector and SignalProcessor, which define abstract methods like detect and process that must be implemented by subclasses. Inheritance is demonstrated as ThresholdDetector inherits from FraudDetector, as for FFTProcessor inherits from SignalProcessor, providing specific implementations of these abstract methods.
 
-4.  **Polymorphism**
+ 4.  **Polymorphism**
+    
      ```python
     class FraudDetector(ABC): 
     
@@ -185,9 +186,9 @@ The FraudDetector interface defines the abstract detect(self, processed_signal, 
 
 ## Design pattern
 
-**Factory Method**
+   **Factory Method**
 
-```python
+   ```python
     
     class DetectorFactory: 
         @staticmethod
