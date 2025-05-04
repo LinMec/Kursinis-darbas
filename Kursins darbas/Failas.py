@@ -7,6 +7,7 @@ import pywt
 from datetime import datetime
 import os
 import networkx as nx  
+from pathlib import Path
 
 class DataLoader(ABC):
     @abstractmethod
@@ -26,9 +27,7 @@ class TransactionData:
         for line in raw_data:
             if not line.strip():  
                 continue
-                
             parts = line.strip().split(',')
-            
             if self.__data_type == "credit_card":
                 timestamp = float(parts[0])
                 amount = float(parts[1])
@@ -191,7 +190,6 @@ class GraphFraudDetector(FraudDetector):
                 if i != j and nx.has_path(G, nodes[i], nodes[j]):
                     try:
                         path = nx.dijkstra_path(G, nodes[i], nodes[j], weight='weight')
-                        
                         total = 0
                         for k in range(len(path)-1):
                             total += G[path[k]][path[k+1]]['weight']
@@ -200,7 +198,6 @@ class GraphFraudDetector(FraudDetector):
                             suspicious_paths.append((path, total))
                     except nx.NetworkXNoPath:
                         continue
-        
         return {
             'suspicious_paths': suspicious_paths
         }
@@ -245,23 +242,19 @@ class FraudVisualizer:
         else:
             timestamps, amounts = raw_data.get_time_series()
             fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(12, 15), constrained_layout=True)
-        
             ax1.plot(amounts, 'b-')
             title_prefix = "Credit Card Transactions" if data_type == "credit_card" else "Insurance Claims"
             ax1.set_title(f'{title_prefix} (Original Data)')
             ax1.set_xlabel('Transaction Index')
             ax1.set_ylabel('Amount')
-            
             ax2.plot(processed_signal, 'g-')
             ax2.set_title(f'Processed Signal using {processor.get_name()}')
             ax2.set_xlabel('Signal Index')
             ax2.set_ylabel('Magnitude')
-            
             ax3.plot(amounts, 'b-')
             if 'indices' in anomalies and len(anomalies['indices']) > 0:
                 anomaly_indices = anomalies['indices']
                 anomaly_amounts = [amounts[i] for i in anomaly_indices if i < len(amounts)]
-                
                 ax3.scatter(anomaly_indices, anomaly_amounts, color='red', marker='o', 
                             s=100, label='Potential Fraud')
                 if 'scores' in anomalies:
@@ -317,8 +310,9 @@ class FraudAnalysisSystem:
         if raw_data is None:
             return None
         
-        #Sitoje vietoje yra rasomi failai 
-        output_path = r"C:\Users\mecko\OneDrive\Desktop\Kursins darbas\info.txt"
+        script_dir = Path(__file__).parent
+        script_dir = Path.cwd()
+        output_path = script_dir / "info.txt"
    
         if isinstance(self.fraud_detector, GraphFraudDetector):
             with open(output_path, "w") as f:
@@ -359,10 +353,10 @@ def main():
     
     if choice == "1":
         data_type = "credit_card"
-        file_path = r"C:\Users\mecko\OneDrive\Desktop\Kursins darbas\credit_card_transactions.txt"
+        file_path = Path("credit_card_transactions.txt")
         
     elif choice == "2":
-        file_path = r"C:\Users\mecko\OneDrive\Desktop\Kursins darbas\insurance_claims.txt"
+        file_path = Path("insurance_claims.txt")
         data_type = "insurance"
 
     else:
