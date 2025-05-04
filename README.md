@@ -7,13 +7,13 @@ A Python program to detect and trace financial fraud by analyzing data patterns.
 
 ---
 
-## What does it do?
+### What does it do?
 
 This program is designed to detect and trace financial fraud by analyzing data patterns. It visualizes its findings either via signal (where wavelet and FFT is used, and is compared to the threshold), or through graph-based models that illustrate relationships using vertices and edges.
 
 ---
 
-## How to Run
+### How to Run
 
 1. **Install dependencies:**
     ```
@@ -23,7 +23,9 @@ This program is designed to detect and trace financial fraud by analyzing data p
 
 3. Run the program
 
-## OOP 4 pillars
+## Body analysis
+
+### OOP 4 pillars
 
 1. **Encapsulation**
 
@@ -212,11 +214,115 @@ The FraudDetector interface defines the abstract detect(self, processed_signal, 
                 raise ValueError(f"Unsupported processor type: {processor_type}")
 ```
 
-The reason as to why I've put the factory method instead of singleton, prototype, or builder is because I needed an interface for creating families of related or dependent objects without specifying their concrete classes. The Singleton pattern ensures that only one instance of a class exists, but I don't need that because I'm searching for multipurposefuness. The Prototype pattern involves creating new objects by cloning existing ones, but I don't need that, since I'm delibaretely trying to have different types of algorithm objects, and I think the added complexity of a Builder would be unnecessary.
+I chose the Factory Method over Singleton, Prototype, or Builder because I need an interface to create families of related objects without specifying concrete classes. The Singleton ensures a single instance, which isn’t needed, while Prototype focuses on cloning objects, which doesn't align with my need for diverse algorithm types. The Builder would add unnecessary complexity for this purpose.
 
 I needed it for creating families of related objects, easy extensability, and abstraction. 
 
-The detectorFactoryis responsible for creating different types of FraudDetector objects (ThresholdDetector, GraphFraudDetector). The create_detector static method takes a detector_type string and optional keyword arguments to instantiate the appropriate concrete detector.
+The detectorFactory is responsible for creating different types of FraudDetector objects (ThresholdDetector, GraphFraudDetector). The create_detector static method takes a detector_type string and optional keyword arguments to instantiate the appropriate concrete detector.
+
+## Composition/aggregation
+
+ 1. **Aggregation**
+
+ ```python
+class FraudAnalysisSystem: 
+    
+    def __init__(self, data_loader, signal_processor, fraud_detector, visualizer): 
+        self.data_loader = data_loader
+        self.signal_processor = signal_processor
+        self.fraud_detector = fraud_detector
+        self.visualizer = visualizer
+    
+    def analyze(self, file_path):
+        raw_data = self.data_loader.load(file_path)
+        if raw_data is None:
+            return None
+        
+        script_dir = Path(__file__).parent
+        script_dir = Path.cwd()
+        output_path = script_dir / "info.txt"
+   
+        if isinstance(self.fraud_detector, GraphFraudDetector):
+            with open(output_path, "w") as f:
+                f.write(f"Loaded {raw_data.get_transaction_count()} transactions of type {raw_data.get_data_type()}\n")
+                f.write(f"Using graph-based detection with {self.fraud_detector.get_name()}\n")
+
+
+            anomalies = self.fraud_detector.detect(None, raw_data)
+            suspicious_paths_count = len(anomalies.get('suspicious_paths', []))
+            with open(output_path, "w") as f:
+             f.write(f"Loaded {raw_data.get_transaction_count()} transactions of type {raw_data.get_data_type()}\n")
+             f.write(f"Detected {suspicious_paths_count} suspicious transaction paths")
+        else:
+
+            processed_signal = self.signal_processor.process(raw_data)
+            with open(output_path, "w") as f:
+                f.write(f"Processed signal using {self.signal_processor.get_name()}\n")
+                anomalies = self.fraud_detector.detect(processed_signal, raw_data)
+                anomaly_count = len(anomalies.get('indices', []))
+                f.write(f"Detected {anomaly_count} potential fraud cases using {self.fraud_detector.get_name()}\n")
+ 
+        self.visualizer.visualize(raw_data, 
+                                 self.signal_processor.process(raw_data) if not isinstance(self.fraud_detector, GraphFraudDetector) else None,
+                                 anomalies, 
+                                 self.signal_processor, 
+                                 self.fraud_detector)
+        
+        return anomalies
+```
+
+The FraudAnalysisSystem aggregates instances of DataLoader, SignalProcessor, FraudDetector, and FraudVisualizer. It relies on these independent objects to perform their specific tasks (loading data, processing signals, detecting fraud, and visualizing results).
+
+2. **Composition**
+   
+```python
+
+class TransactionData:
+    
+    def __init__(self, raw_data, data_type):
+        self.__transactions = []
+        self.__timestamps = []
+        self.__amounts = []
+        self.__data_type = data_type  
+        self.__parse_data(raw_data)
+    
+    def __parse_data(self, raw_data):
+        for line in raw_data:
+            if not line.strip():  
+                continue
+            parts = line.strip().split(',')
+            if self.__data_type == "credit_card":
+                timestamp = float(parts[0])
+                amount = float(parts[1])
+                merchant = parts[2]
+                card_id = parts[3]
+                
+                self.__timestamps.append(timestamp)
+                self.__amounts.append(amount)
+                self.__transactions.append({
+                    'timestamp': timestamp,
+                    'amount': amount,
+                    'merchant': merchant,
+                    'card_id': card_id
+                })
+            elif self.__data_type == "insurance":
+
+                claim_date = parts[0]
+                claim_amount = float(parts[1])
+                policy_id = parts[2]
+                claim_type = parts[3]
+                
+                self.__timestamps.append(self._convert_date_to_timestamp(claim_date))
+                self.__amounts.append(claim_amount)
+                self.__transactions.append({
+                    'claim_date': claim_date, 
+                    'claim_amount': claim_amount,
+                    'policy_id': policy_id,
+                    'claim_type': claim_type
+                })
+```
+The TransactionData class composes its internal data structures (__transactions, __timestamps, __amounts, __data_type). These lists and the data type are parts of the TransactionData object, which are quite important.
+
     
 
 
