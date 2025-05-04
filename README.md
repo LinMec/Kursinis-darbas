@@ -29,7 +29,7 @@ This program is designed to detect and trace financial fraud by analyzing data p
 
 1. **Encapsulation**
 
-    ```python
+```python
     
    class TransactionData
        def __init__(self, raw_data, data_type):
@@ -59,15 +59,15 @@ This program is designed to detect and trace financial fraud by analyzing data p
                     'card_id': card_id
                 })
             elif self.__data_type == "insurance":
-    ```
+```
     
 Transactions, amounts, and every other morsel of data are securely stuffed inside layers of encapsulation. Why? Because cyber-attacks are out there, lurking, like a badly tuned Audi A3 in "Krasnucha", ready to ruin your day. But in all seriousness, it's the main use of encapsulation - safety, so that only intended users would be able to get the data.
 
 Encapsulation in this TransactionData class hides the internal data structures such as __transactions, __timestamps, and __amounts by making them private with double underscores. This prevents direct access or modification of these attributes from outside the class, ensuring data integrity. The class controls how raw input data is parsed and stored through the private method __parse_data, centralizing and protecting the parsing logic.
 
-2/3.  **Abstraction/Inheritance**
+2/3. **Abstraction/Inheritance**
 
-   ```python
+ ```python
 
    class FraudDetector(ABC): 
         @abstractmethod
@@ -115,7 +115,7 @@ class FFTProcessor(SignalProcessor):
 
     def get_name(self):
         return "Fast Fourier Transform"
-   ```
+  ```
       
 I put both codes in there to show how inheritance and abstraction work together like an abusive relationship. Abstraction lays down all the rules without doing any real work, and inheritance just nods along and takes everything, whether it asked for it or not. I used this a lot because it is simply comfortable to use. In all seriousness, inheritance and abstraction are often used together to create well-organized and manageable code.
 
@@ -190,9 +190,9 @@ The FraudDetector interface defines the abstract detect(self, processed_signal, 
 
 ## Design pattern
 
-   **Factory Method**
+**Factory Method**
    
-   ```python
+```python
     
     class DetectorFactory: 
         @staticmethod
@@ -223,10 +223,10 @@ The detectorFactory is responsible for creating different types of FraudDetector
 
 ## Composition/aggregation
 
- 1. **Aggregation**
+1. **Aggregation**
 
  ```python
-class FraudAnalysisSystem: 
+ class FraudAnalysisSystem: 
     
     def __init__(self, data_loader, signal_processor, fraud_detector, visualizer): 
         self.data_loader = data_loader
