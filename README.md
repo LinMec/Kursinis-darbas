@@ -22,3 +22,7 @@ This program is designed to detect and trace financial fraud by analyzing data p
 2. Place all data files in the same folder, open it in Visual Studio Code, and use the Explorer to navigate them.
 
 3. Run the program
+
+## OOP 4 pillars
+
+**Encapsulation**
