@@ -64,7 +64,7 @@ Encapsulation in this TransactionData class hides the internal data structures s
 
 2/3.  **Abstraction/Inheritance**
 
- ```python
+   ```python
        class FraudDetector(ABC): 
         @abstractmethod
         def detect(self, processed_signal, raw_data):
@@ -87,8 +87,8 @@ Encapsulation in this TransactionData class hides the internal data structures s
             'scores': confidence_scores,
             'z_scores': z_scores
         }
-```
-```python
+   ```
+   ```python
 class SignalProcessor(ABC):
 
     @abstractmethod
@@ -112,7 +112,7 @@ class FFTProcessor(SignalProcessor):
 
     def get_name(self):
     return "Fast Fourier Transform"
-```
+   ```
       
 I put both codes in there to show how inheritance and abstraction work together like an abusive relationship. Abstraction lays down all the rules without doing any real work, and inheritance just nods along and takes everything, whether it asked for it or not. I used this a lot because it is simply comfortable to use. In all seriousness, inheritance and abstraction are often used together to create well-organized and manageable code.
 
