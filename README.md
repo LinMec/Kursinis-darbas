@@ -19,13 +19,6 @@ This program is designed to detect and trace financial fraud by analyzing data p
     ```
     pip install numpy matplotlib scipy pywavelets networkx
     ```
-2. Have all of the data files ready (e.g., credit_card_transactions.txt, insurance_claims.txt), and change the intended file path, to where you would like it to be
-   ```
-   output_path = r"C:\Users\YourUser\ThePlaceWhereYouPutTheFolder\Kursins darbas\info.txt"
-   file_path = r"C:\Users\YourUser\ThePlaceWhereYouPutTheFolder\Kursins darbas\insurance_claims.txt"
-   file_path = r"C:\Users\YourUser\PlaceWhereYouPutTheFolder\Kursins darbas\credit_card_transactions.txt"
-   ```
+2. Place all data files in the same folder, open it in Visual Studio Code, and use the Explorer to navigate them.
+
 3. Run the program
-   ```
-   python Failas.py
-   ```
