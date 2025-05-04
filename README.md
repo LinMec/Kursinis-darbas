@@ -60,7 +60,7 @@ This program is designed to detect and trace financial fraud by analyzing data p
                 })
             elif self.__data_type == "insurance":
 ```
-    
+
 Transactions, amounts, and every other morsel of data are securely stuffed inside layers of encapsulation. Why? Because cyber-attacks are out there, lurking, like a badly tuned Audi A3 in "Krasnucha", ready to ruin your day. But in all seriousness, it's the main use of encapsulation - safety, so that only intended users would be able to get the data.
 
 Encapsulation in this TransactionData class hides the internal data structures such as __transactions, __timestamps, and __amounts by making them private with double underscores. This prevents direct access or modification of these attributes from outside the class, ensuring data integrity. The class controls how raw input data is parsed and stored through the private method __parse_data, centralizing and protecting the parsing logic.
@@ -274,6 +274,7 @@ The detectorFactory is responsible for creating different types of FraudDetector
 
 The FraudAnalysisSystem aggregates instances of DataLoader, SignalProcessor, FraudDetector, and FraudVisualizer. It relies on these independent objects to perform their specific tasks (loading data, processing signals, detecting fraud, and visualizing results).
 
+
 2. **Composition**
    
 ```python
@@ -322,6 +323,7 @@ class TransactionData:
                     'claim_type': claim_type
                 })
 ```
+
 The TransactionData class composes its internal data structures (__transactions, __timestamps, __amounts, __data_type). These lists and the data type are parts of the TransactionData object, which are quite important.
 
     
