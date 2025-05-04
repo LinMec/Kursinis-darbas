@@ -28,7 +28,8 @@ This program is designed to detect and trace financial fraud by analyzing data p
 1. **Encapsulation**
 
     ```python
-    class TransactionData
+    
+   class TransactionData
        def __init__(self, raw_data, data_type):
         self.__transactions = []
         self.__timestamps = []
@@ -65,11 +66,13 @@ Encapsulation in this TransactionData class hides the internal data structures s
 2/3.  **Abstraction/Inheritance**
 
    ```python
+
    class FraudDetector(ABC): 
         @abstractmethod
         def detect(self, processed_signal, raw_data):
-        pass
-        class ThresholdDetector(FraudDetector): 
+            pass
+
+   class ThresholdDetector(FraudDetector): 
         def __init__(self, threshold=2):
         self.threshold = threshold
 
@@ -87,18 +90,15 @@ Encapsulation in this TransactionData class hides the internal data structures s
             'scores': confidence_scores,
             'z_scores': z_scores
         }
-```
 
-```python
-class SignalProcessor(ABC):
-
+class SignalProcessor(ABC): #second code here
     @abstractmethod
     def process(self, data):
-    pass
+        pass
 
     @abstractmethod
     def get_name(self):
-    pass
+        pass
 
 class FFTProcessor(SignalProcessor):
 
@@ -112,7 +112,7 @@ class FFTProcessor(SignalProcessor):
     return np.abs(spectrum)
 
     def get_name(self):
-    return "Fast Fourier Transform"
+        return "Fast Fourier Transform"
    ```
       
 I put both codes in there to show how inheritance and abstraction work together like an abusive relationship. Abstraction lays down all the rules without doing any real work, and inheritance just nods along and takes everything, whether it asked for it or not. I used this a lot because it is simply comfortable to use. In all seriousness, inheritance and abstraction are often used together to create well-organized and manageable code.
