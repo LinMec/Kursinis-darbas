@@ -62,7 +62,7 @@ Transactions, amounts, and every other morsel of data are securely stuffed insid
 
 Encapsulation in this TransactionData class hides the internal data structures such as __transactions, __timestamps, and __amounts by making them private with double underscores. This prevents direct access or modification of these attributes from outside the class, ensuring data integrity. The class controls how raw input data is parsed and stored through the private method __parse_data, centralizing and protecting the parsing logic.
 
-   2/3.  **Abstraction/Inheritance**
+2/3.  **Abstraction/Inheritance**
 
    ```python
        class FraudDetector(ABC): 
@@ -120,7 +120,8 @@ I put both codes in there to show how inheritance and abstraction work together 
 In the code, abstraction is shown by the abstract base classes FraudDetector and SignalProcessor, which define abstract methods like detect and process that must be implemented by subclasses. Inheritance is demonstrated as ThresholdDetector inherits from FraudDetector, as for FFTProcessor inherits from SignalProcessor, providing specific implementations of these abstract methods.
 
  4.  **Polymorphism**
-       ```python
+
+      ```python
     class FraudDetector(ABC): 
     
         @abstractmethod
@@ -175,10 +176,8 @@ In the code, abstraction is shown by the abstract base classes FraudDetector and
         return {
             'suspicious_paths': suspicious_paths
         }
-
         def get_name(self):
-        return f"Graph Dijkstra Detector (min_path_amount={self.min_path_amount})"
-     ```
+        return f"Graph Dijkstra Detector (min_path_amount={self.min_path_amount})
 
 Polymorphism isn’t just code, it’s a shapeshifting virus in a trench coat, sliding through 32 shadow interfaces like a neural ghost jacked into corporate mainframes. Every time you invoke a method, a child's dream is overriden with existential dread.
 
@@ -187,7 +186,8 @@ The FraudDetector interface defines the abstract detect(self, processed_signal, 
 ## Design pattern
 
    **Factory Method**
-     ```python
+   
+   ```python
     
     class DetectorFactory: 
         @staticmethod
@@ -208,7 +208,7 @@ The FraudDetector interface defines the abstract detect(self, processed_signal, 
                 return WaveletProcessor(**kwargs)
             else:
                 raise ValueError(f"Unsupported processor type: {processor_type}")
-    ```
+```
 
 The reason as to why I've put the factory method instead of singleton, prototype, or builder is because I needed an interface for creating families of related or dependent objects without specifying their concrete classes. The Singleton pattern ensures that only one instance of a class exists, but I don't need that because I'm searching for multipurposefuness. The Prototype pattern involves creating new objects by cloning existing ones, but I don't need that, since I'm delibaretely trying to have different types of algorithm objects, and I think the added complexity of a Builder would be unnecessary.
 
