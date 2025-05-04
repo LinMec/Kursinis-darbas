@@ -1,7 +1,7 @@
 # Fraud detection system (with Signal and Graph visualization and its applications)
 
 
-## Introduction
+## 🟢Introduction
 
 A Python program to detect and trace financial fraud by analyzing data patterns. Visualizes findings via signal (wavelet/FFT) and graph-based models.
 
@@ -23,7 +23,7 @@ This program is designed to detect and trace financial fraud by analyzing data p
 
 3. Run the program
 
-## Body analysis
+## 🟢Body analysis
 
 ### OOP 4 pillars
 
@@ -274,7 +274,6 @@ The detectorFactory is responsible for creating different types of FraudDetector
 
 The FraudAnalysisSystem aggregates instances of DataLoader, SignalProcessor, FraudDetector, and FraudVisualizer. It relies on these independent objects to perform their specific tasks (loading data, processing signals, detecting fraud, and visualizing results).
 
-
 2. **Composition**
    
 ```python
@@ -344,6 +343,29 @@ The TransactionData class composes its internal data structures (__transactions,
  ```
 
 Both output and input is taken from the path library for easy integration
+
+## 🟢Results
+
+### Test results 
+
+✨ Data Parsing ✅
+✨ Graph Building ✅
+✨ Signal Processing ✅
+✨ Fraud Detection Logic ✅
+✨ Factory Pattern ✅
+✨ All tasks completed! ✅
+
+### Possible extension of the application 
+
+I suppose it would be rather useful to check through few aspects 
+  - Algorithms: It would be rather useful to have different, and more effective algorithms at play, since it would tackle big data. FFT Wavelet z threshold detection would only help with a user's transactions, so only djikstra's algorithm would help relationally.
+  - Integrate data: I could integrate this program so it would be able to tackle SQL databases alongside APIs, but it would need more coding.
+  - Actual real life application: This could be integrated in a game or any other system, as this is only a prototype, but it would help a lot to punish people that may seem suspicious
+  - GUI for the SYSAdmin: So that it would be pleasant for the SYSAdmin's eyes:) 
+
+### What I've learned
+
+I suppose I've learned how to display signals and graphs, I now know how to use more advanced data structure algorithms, alongside signal processing and statistics. 
 
 
 
