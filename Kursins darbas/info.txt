@@ -1,0 +1,2 @@
+Processed signal using Fast Fourier Transform
+Detected 3 potential fraud cases using Threshold Detector (threshold=1.5)
