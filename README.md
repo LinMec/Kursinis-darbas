@@ -326,6 +326,28 @@ class TransactionData:
 
 The TransactionData class composes its internal data structures (__transactions, __timestamps, __amounts, __data_type). These lists and the data type are parts of the TransactionData object, which are quite important.
 
+## Text file
+
+ ```python
+    if choice == "1":
+        data_type = "credit_card"
+        file_path = Path("credit_card_transactions.txt")
+        
+    elif choice == "2":
+        file_path = Path("insurance_claims.txt")
+        data_type = "insurance"
+
+
+        script_dir = Path(__file__).parent
+        script_dir = Path.cwd()
+        output_path = script_dir / "info.txt"
+ ```
+
+Both output and input is taken from the path library for easy integration
+
+
+
+
     
 
 
