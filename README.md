@@ -120,7 +120,69 @@ In the code, abstraction is shown by the abstract base classes FraudDetector and
 
 4.  **Polymorphism**
      ```python
-     
+    class FraudDetector(ABC): 
+    
+        @abstractmethod
+        def detect(self, processed_signal, raw_data):
+        pass
+    
+
+    class ThresholdDetector(FraudDetector): 
+        def __init__(self, threshold=2):
+        self.threshold = threshold
+
+        def detect(self, processed_signal, raw_data):
+        _, amounts = raw_data.get_time_series()
+        amounts = np.array(amounts)
+        mean = np.mean(amounts)
+        std = np.std(amounts)
+        z_scores = np.abs((amounts - mean) / std)
+        anomaly_indices = np.where(z_scores > self.threshold)[0]
+        confidence_scores = z_scores[anomaly_indices] / self.threshold
+
+        return {
+            'indices': anomaly_indices,
+            'scores': confidence_scores,
+            'z_scores': z_scores
+        }
+
+        def get_name(self):
+        return f"Threshold Detector (threshold={self.threshold})"  
+
+    class GraphFraudDetector(FraudDetector): 
+
+        def __init__(self, min_path_amount=5000):
+        self.min_path_amount = min_path_amount
+
+        def detect(self, processed_signal, raw_data):
+        G = raw_data.build_transaction_graph()
+        suspicious_paths = []
+        nodes = list(G.nodes)
+        for i in range(len(nodes)):
+            for j in range(i+1, len(nodes)):  
+                if i != j and nx.has_path(G, nodes[i], nodes[j]):
+                    try:
+                        path = nx.dijkstra_path(G, nodes[i], nodes[j], weight='weight')
+                        total = 0
+                        for k in range(len(path)-1):
+                            total += G[path[k]][path[k+1]]['weight']
+                            
+                        if total > self.min_path_amount:
+                            suspicious_paths.append((path, total))
+                    except nx.NetworkXNoPath:
+                        continue
+        return {
+            'suspicious_paths': suspicious_paths
+        }
+
+        def get_name(self):
+        return f"Graph Dijkstra Detector (min_path_amount={self.min_path_amount})"
+     ```
+
+Polymorphism isn’t just code, it’s a shapeshifting virus in a trench coat, sliding through 32 shadow interfaces like a neural ghost jacked into corporate mainframes. Every time you invoke a method, a child's dream is overriden with existential dread.
+
+The FraudDetector interface defines the abstract detect(self, processed_signal, raw_data) method. The ThresholdDetector and GraphFraudDetector classes implement distinct fraud detection algorithms. Polymorphism enables the FraudAnalysisSystem to use any FraudDetector implementation through its detect method
+    
       
 
    
