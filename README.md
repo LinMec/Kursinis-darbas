@@ -48,7 +48,7 @@ This program is designed to detect and trace financial fraud by analyzing data p
                 card_id = parts[3]
                 
                 self.__timestamps.append(timestamp)
-                self.__amounts.append(amount)
+                self.__amounts.append(amount) #The __ is the attribute for encapsulation
                 self.__transactions.append({
                     'timestamp': timestamp,
                     'amount': amount,
@@ -57,4 +57,4 @@ This program is designed to detect and trace financial fraud by analyzing data p
                 })
             elif self.__data_type == "insurance":
     ```
-    Transactions, amounts, and every other morsel of data are securely stuffed inside layers of encapsulation. Why? Because cyber-attacks are out there, lurking, like a badly tuned Vauxhall Astra in "Krasnucha", ready to ruin your day.
+    Transactions, amounts, and every other morsel of data are securely stuffed inside layers of encapsulation. Why? Because cyber-attacks are out there, lurking, like a badly tuned Audi A3 in "Krasnucha", ready to ruin your day.
