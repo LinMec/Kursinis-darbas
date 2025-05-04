@@ -46,7 +46,7 @@ This program is designed to detect and trace financial fraud by analyzing data p
                     amount = float(parts)
                     merchant = parts
                     card_id = parts
-                    self.__timestamps.append(timestamp)  #The self_.. is an encapsulation
+                    self.__timestamps.append(timestamp)  #This thing right here, the __ thing is an attribute of encapsulation
                     self.__amounts.append(amount)
                     self.__transactions.append({  
                         'timestamp': timestamp,
@@ -58,4 +58,4 @@ This program is designed to detect and trace financial fraud by analyzing data p
                     # Add insurance data parsing here
                     pass
     ```
-    Transactions, amounts, and every other morsel of data, whether it’s linked to actual people or just poor old time/data being crunched by FFTs or wavelets, are securely stuffed inside layers of encapsulation. Why? Because cyber-attacks are out there, lurking, like a badly tuned Vauxhall Astra in "Krasnucha", ready to ruin your day. The given encapsulation attribute is __.
+    Transactions, amounts, and every other morsel of data are securely stuffed inside layers of encapsulation. Why? Because cyber-attacks are out there, lurking, like a badly tuned Vauxhall Astra in "Krasnucha", ready to ruin your day.
