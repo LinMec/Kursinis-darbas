@@ -121,9 +121,9 @@ I put both codes in there to show how inheritance and abstraction work together 
 
 In the code, abstraction is shown by the abstract base classes FraudDetector and SignalProcessor, which define abstract methods like detect and process that must be implemented by subclasses. Inheritance is demonstrated as ThresholdDetector inherits from FraudDetector, as for FFTProcessor inherits from SignalProcessor, providing specific implementations of these abstract methods.
 
-4.  **Polymorphism**
+4. **Polymorphism**
    
-    ```python
+```python
     
     class FraudDetector(ABC): 
     
@@ -181,7 +181,8 @@ In the code, abstraction is shown by the abstract base classes FraudDetector and
         }
         def get_name(self):
         return f"Graph Dijkstra Detector (min_path_amount={self.min_path_amount})
-    ```
+
+```
 
 Polymorphism isn’t just code, it’s a shapeshifting virus in a trench coat, sliding through 32 shadow interfaces like a neural ghost jacked into corporate mainframes. Every time you invoke a method, a child's dream is overriden with existential dread.
 
