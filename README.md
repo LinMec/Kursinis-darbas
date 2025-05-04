@@ -57,4 +57,63 @@ This program is designed to detect and trace financial fraud by analyzing data p
                 })
             elif self.__data_type == "insurance":
     ```
-    Transactions, amounts, and every other morsel of data are securely stuffed inside layers of encapsulation. Why? Because cyber-attacks are out there, lurking, like a badly tuned Audi A3 in "Krasnucha", ready to ruin your day.
+    
+    Transactions, amounts, and every other morsel of data are securely stuffed inside layers of encapsulation. Why? Because cyber-attacks are out there, lurking, like a badly tuned Audi A3 in "Krasnucha", ready to ruin your day. But in all seriousness, it's the main use of encapsulation - safety, so that only intended users would be able to get the data.
+
+   2. **Inheritance/Abstraction**
+
+      ```python
+      class FraudDetector(ABC): 
+    
+        @abstractmethod
+        def detect(self, processed_signal, raw_data):
+        pass
+        class ThresholdDetector(FraudDetector): 
+        def __init__(self, threshold=2):
+        self.threshold = threshold
+
+        def detect(self, processed_signal, raw_data):
+        _, amounts = raw_data.get_time_series()
+        amounts = np.array(amounts)
+        mean = np.mean(amounts)
+        std = np.std(amounts)
+        z_scores = np.abs((amounts - mean) / std)
+        anomaly_indices = np.where(z_scores > self.threshold)[0]
+        confidence_scores = z_scores[anomaly_indices] / self.threshold
+
+        return {
+            'indices': anomaly_indices,
+            'scores': confidence_scores,
+            'z_scores': z_scores
+        }
+      ```
+      ```python
+      class SignalProcessor(ABC): 
+    
+        @abstractmethod
+        def process(self, data):
+        pass
+    
+        @abstractmethod
+        def get_name(self):
+        pass
+
+      class FFTProcessor(SignalProcessor): 
+    
+        def __init__(self, sample_rate=1000):
+        self.sample_rate = sample_rate
+        
+        def process(self, data):
+        timestamps, amounts = data.get_time_series()
+        normalized_amounts = (amounts - np.mean(amounts)) / np.std(amounts)
+        spectrum = fft(normalized_amounts)
+        return np.abs(spectrum)
+    
+        def get_name(self):
+        return "Fast Fourier Transform"
+      ```
+
+      I put both codes in there to show how inheritance and abstraction work together like an abusive relationship. Abstraction lays down all the rules without doing any real work, and inheritance just nods along and takes everything, whether it asked for it or not. I used this a lot because it was simply comfortable. 
+      
+
+   
