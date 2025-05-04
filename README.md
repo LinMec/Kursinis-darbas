@@ -62,7 +62,7 @@ Transactions, amounts, and every other morsel of data are securely stuffed insid
 
 Encapsulation in this TransactionData class hides the internal data structures such as __transactions, __timestamps, and __amounts by making them private with double underscores. This prevents direct access or modification of these attributes from outside the class, ensuring data integrity. The class controls how raw input data is parsed and stored through the private method __parse_data, centralizing and protecting the parsing logic.
 
-2  **Abstraction/Inheritance**
+2/3.  **Abstraction/Inheritance**
 
  ```python
        class FraudDetector(ABC): 
