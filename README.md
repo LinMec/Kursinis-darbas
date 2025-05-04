@@ -27,8 +27,7 @@ This program is designed to detect and trace financial fraud by analyzing data p
 
 1. **Encapsulation**
 
-    ```
-    python
+    ```python
     class TransactionData:
         def __init__(self, raw_data, data_type):
             self.__transactions = []
