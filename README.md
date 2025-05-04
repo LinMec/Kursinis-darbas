@@ -28,34 +28,33 @@ This program is designed to detect and trace financial fraud by analyzing data p
 1. **Encapsulation**
 
     ```python
-    class TransactionData:
-        def __init__(self, raw_data, data_type):
-            self.__transactions = []
-            self.__timestamps = []
-            self.__amounts = []
-            self.__data_type = data_type  
-            self.__parse_data(raw_data)
-        
-        def __parse_data(self, raw_data):
-            for line in raw_data:
-                if not line.strip():  
-                    continue
-                parts = line.strip().split(',')
-                if self.__data_type == "credit_card":
-                    timestamp = float(parts)
-                    amount = float(parts)
-                    merchant = parts
-                    card_id = parts
-                    self.__timestamps.append(timestamp)  #This thing right here, the __ thing is an attribute of encapsulation
-                    self.__amounts.append(amount)
-                    self.__transactions.append({  
-                        'timestamp': timestamp,
-                        'amount': amount,
-                        'merchant': merchant,
-                        'card_id': card_id
-                    })
-                elif self.__data_type == "insurance":
-                    # Add insurance data parsing here
-                    pass
+        class TransactionData
+       def __init__(self, raw_data, data_type):
+        self.__transactions = []
+        self.__timestamps = []
+        self.__amounts = []
+        self.__data_type = data_type  
+        self.__parse_data(raw_data)
+    
+    def __parse_data(self, raw_data):
+        for line in raw_data:
+            if not line.strip():  
+                continue
+            parts = line.strip().split(',')
+            if self.__data_type == "credit_card":
+                timestamp = float(parts[0])
+                amount = float(parts[1])
+                merchant = parts[2]
+                card_id = parts[3]
+                
+                self.__timestamps.append(timestamp)
+                self.__amounts.append(amount)
+                self.__transactions.append({
+                    'timestamp': timestamp,
+                    'amount': amount,
+                    'merchant': merchant,
+                    'card_id': card_id
+                })
+            elif self.__data_type == "insurance":
     ```
     Transactions, amounts, and every other morsel of data are securely stuffed inside layers of encapsulation. Why? Because cyber-attacks are out there, lurking, like a badly tuned Vauxhall Astra in "Krasnucha", ready to ruin your day.
