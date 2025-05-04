@@ -182,7 +182,42 @@ In the code, abstraction is shown by the abstract base classes FraudDetector and
 Polymorphism isn’t just code, it’s a shapeshifting virus in a trench coat, sliding through 32 shadow interfaces like a neural ghost jacked into corporate mainframes. Every time you invoke a method, a child's dream is overriden with existential dread.
 
 The FraudDetector interface defines the abstract detect(self, processed_signal, raw_data) method. The ThresholdDetector and GraphFraudDetector classes implement distinct fraud detection algorithms. Polymorphism enables the FraudAnalysisSystem to use any FraudDetector implementation through its detect method
+
+## Design pattern
+
+**Factory Method**
+
+```python
     
+    class DetectorFactory: 
+        @staticmethod
+        def create_detector(detector_type, **kwargs):
+        if detector_type == "threshold":
+            return ThresholdDetector(**kwargs)
+        elif detector_type == "graph":
+            return GraphFraudDetector(**kwargs)
+        else:
+            raise ValueError(f"Unsupported detector type: {detector_type}")
+
+    class ProcessorFactory:
+        @staticmethod
+        def create_processor(processor_type, **kwargs):
+            if processor_type == "fft":
+                return FFTProcessor(**kwargs)
+            elif processor_type == "wavelet":
+                return WaveletProcessor(**kwargs)
+            else:
+                raise ValueError(f"Unsupported processor type: {processor_type}")
+```
+
+The reason as to why I've put the factory method instead of singleton, prototype, or builder is because I needed an interface for creating families of related or dependent objects without specifying their concrete classes. The Singleton pattern ensures that only one instance of a class exists, but I don't need that because I'm searching for multipurposefuness. The Prototype pattern involves creating new objects by cloning existing ones, but I don't need that, since I'm delibaretely trying to have different types of algorithm objects, and I think the added complexity of a Builder would be unnecessary.
+
+I needed it for creating families of related objects, easy extensability, and abstraction. 
+
+The detectorFactoryis responsible for creating different types of FraudDetector objects (ThresholdDetector, GraphFraudDetector). The create_detector static method takes a detector_type string and optional keyword arguments to instantiate the appropriate concrete detector.
+    
+
+
       
 
    
